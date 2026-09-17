@@ -39,3 +39,14 @@ export type Recipe = {
   ingredients: Ingredient[];
   steps: RecipeStep[];
 };
+
+export type ChecklistState = Record<string, boolean>;
+
+export type RecipeProgress = {
+  ingredients: ChecklistState;
+  steps: ChecklistState;
+  /** ISO timestamp for the most recent time this recipe was logged as complete. */
+  completedAt?: string;
+};
+
+export type ProgressByRecipe = Record<string, RecipeProgress>;

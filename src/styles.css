@@ -59,6 +59,92 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button:disabled {
+  opacity: 0.55;
+}
+
+.sync-panel {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(72, 41, 18, 0.14);
+  color: #604838;
+  font-size: 0.84rem;
+}
+
+.sync-panel p {
+  display: grid;
+  gap: 4px;
+}
+
+.auth-form {
+  display: grid;
+  gap: 10px;
+}
+
+.auth-form h3 {
+  font-size: 1.2rem;
+}
+
+.auth-form label {
+  display: grid;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.auth-form input {
+  width: 100%;
+  border: 1px solid rgba(72, 41, 18, 0.2);
+  border-radius: 9px;
+  padding: 9px 10px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.compact-button {
+  padding: 10px 14px;
+  font-size: 0.85rem;
+}
+
+.text-button {
+  padding: 0;
+  color: #95502f;
+  background: transparent;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.form-error {
+  color: #9d3025;
+}
+
+.completion-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 18px 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(125, 73, 32, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 248, 241, 0.62);
+}
+
+.completion-bar p {
+  color: #604838;
+  font-size: 0.86rem;
+}
+
+.completion-button {
+  flex: 0 0 auto;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: #fffaf4;
+  background: #8b4529;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 h1,
 h2,
 h3,

@@ -393,11 +393,22 @@ h3 {
   transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
 }
 
+.recipe-card.completed {
+  border-color: rgba(42, 117, 77, 0.45);
+  background: linear-gradient(180deg, rgba(239, 251, 241, 0.98), rgba(218, 241, 222, 0.96));
+  box-shadow: 0 12px 24px rgba(42, 117, 77, 0.1);
+}
+
 .recipe-card:hover,
 .recipe-card.active {
   transform: translateY(-2px);
   box-shadow: 0 18px 34px rgba(104, 62, 30, 0.12);
   border-color: rgba(198, 110, 54, 0.28);
+}
+
+.recipe-card.completed:hover,
+.recipe-card.completed.active {
+  border-color: rgba(42, 117, 77, 0.6);
 }
 
 .recipe-card strong {
@@ -450,6 +461,14 @@ h3 {
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #8b6755;
+}
+
+.recipe-card.completed .recipe-card-footer {
+  color: #286b46;
+}
+
+.recipe-progress-status {
+  font-weight: 700;
 }
 
 .recipe-workspace {

@@ -320,12 +320,13 @@ export default function App() {
                 visibleRecipes.map((recipe) => {
                   const isActive = recipe.id === selectedRecipe?.id;
                   const progress = progressByRecipe[recipe.id];
+                  const isCompleted = Boolean(progress?.completedAt);
 
                   return (
                     <button
                       key={recipe.id}
                       type="button"
-                      className={`recipe-card ${isActive ? "active" : ""}`}
+                      className={`recipe-card ${isActive ? "active" : ""} ${isCompleted ? "completed" : ""}`}
                       onClick={() => setSelectedRecipeId(recipe.id)}
                     >
                       <div className="recipe-card-top">
@@ -337,8 +338,8 @@ export default function App() {
                       <div className="recipe-card-footer">
                         <span>{recipe.time}</span>
                         <span>{recipe.yield}</span>
-                        <span>
-                          {recipeCompletionCount(progress ?? createProgress(recipe), recipe)}
+                        <span className="recipe-progress-status">
+                          {isCompleted ? "Completed" : recipeCompletionCount(progress ?? createProgress(recipe), recipe)}
                         </span>
                       </div>
                     </button>

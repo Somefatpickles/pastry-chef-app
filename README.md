@@ -93,6 +93,8 @@ Granular **Functions-only** environment scopes require Netlify Pro. The owner ap
 
 Production Chef requests validate the Firebase account, restrict request origins and sizes, and use platform and durable per-account/global request limits. The quota store fails closed if unavailable. See [deployment](docs/deployment.md) for setup and limits, and [release notes](docs/release-notes.md) for the verified publication result.
 
+Keep this project's optional **Powered by Netlify** badge disabled so its overlay does not cover the fixed bottom navigation. The [deployment guide](docs/deployment.md#optional-netlify-badge) records the official project setting; no app CSS workaround or paid upgrade is needed.
+
 ## Verification and recipe provenance
 
 Release verification passed **223 automated tests**, the TypeScript/production build and **32 production HTTP checks**. A fresh network-backed `npm audit` reported **0 vulnerabilities** after compatible dependency updates. The earlier network-review baseline passed **20 LAN checks**; isolated Chromium checks covered **375×812, 320×568, 1280×800 and 844×390**, plus reduced motion, including account isolation, favorites, repeated completion logs, chart totals, saves and drawer behavior. The app owner separately confirmed that cloud sync functions as intended on **October 25, 2026**.

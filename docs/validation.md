@@ -14,6 +14,8 @@ The app owner confirmed that cloud sync is functioning as intended on **October 
 | Published Netlify deployment | Ready and published | Application revision `9a308ad`, deployment `6ade3ce2773f7ef622d37de7`, at [the production URL](https://pastry-chef-app.netlify.app/) |
 | Production HTTP smoke checks | **32 passed, 0 failed** | App/assets, three artwork samples, checked secret patterns, private-file **404**, guest/forged-token **401**, cross-origin **403** and Chef availability |
 | Hosted Chef status | **200**, `available: true`, `gpt-5-mini` | Verified runtime configuration health; no account signup or paid provider request |
+| Production Chromium review | Passed at **375×812** and **1280×800** | Navigation, filters, imagery, independent drawer scrolling and Analytics guest gate; zero runtime errors or mutating requests |
+| Optional hosting badge | Disabled using Netlify's supported project setting | Removed an overlay that intercepted mobile navigation; fresh HTML contains no badge injection |
 | TypeScript and production build | Passed | Final security-patched dependencies, browser bundle and generated server catalog/configuration |
 | Dependency audit | **0 vulnerabilities reported** | Fresh network-backed `npm audit` after compatible build-tool updates and the scoped same-major Firestore Node gRPC override |
 | LAN smoke checks | **20 passed** at the network-review baseline | Built assets, status, guest/forged-token rejection, cross-origin rejection, private-file routes and checked asset secret patterns |

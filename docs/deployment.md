@@ -25,6 +25,12 @@ The build script runs TypeScript, builds the browser bundle and generates the re
 
 The standalone `server.mjs` is the local/LAN preview server. Netlify does not execute that long-running listener; its Functions provide the hosted API routes.
 
+## Optional Netlify badge
+
+Keep the optional **Powered by Netlify** badge **disabled** for this project. Its floating overlay can cover Profile and Analytics in CrumbCraft's fixed bottom navigation on mobile. The setting is under **Project configuration → General → Powered by Netlify**. The official toggle works on Free without a redeploy or paid upgrade; no application CSS workaround is required. See [Netlify's badge documentation](https://docs.netlify.com/manage/projects/powered-by-netlify-badge/).
+
+The project setting was switched off and its disabled state verified during release verification. Keep it off when adjusting project branding or deployment settings.
+
 ## Environment variables
 
 The existing project is on **Netlify Free**. Granular environment scopes are a Pro feature. The owner explicitly approved production-only `OPENAI_API_KEY` and `OPENAI_MODEL` variables with the Free plan's all-scopes access. They are configured in Netlify's standard encrypted environment storage and are available to build/post-processing code and Functions. The OpenAI key has no `VITE_` prefix and is not automatically included in the browser bundle. This setup does not claim Functions-only isolation.

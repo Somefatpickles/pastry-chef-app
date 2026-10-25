@@ -9,7 +9,7 @@ A baking companion by **Pixel & Principle**: learn from 68 pastry recipes, keep 
 | Page | What you can do |
 | --- | --- |
 | **Recipe List** | Browse the library or **My recipes**, search titles and ingredients, and combine Category, Skill level, Status and Favorites filters. Star a recipe beside its title without opening it. |
-| **Current Recipe** | Follow preparation, method, doneness and storage guidance. Open **Ingredient List / Save** for a separate scrolling checklist, batch multiplier and save controls. Log each finished bake and use the AI Pastry Chef below the review section. |
+| **Current Recipe** | Follow preparation, method, doneness and storage guidance. Open **Ingredient List / Save** for a separate scrolling checklist, batch multiplier and save controls. Log each finished bake and use the AI Pastry Chef below the review section when its hosted credential is configured. |
 | **Profile** | Create an email/password account, sign in, save a first name, and check library-progress and baking-history sync. |
 | **Analytics** | After sign-in, explore stacked bars with a cumulative line, date ranges, daily/weekly/monthly groups, category filters and dated bake history. |
 
@@ -30,6 +30,8 @@ Recipes display household baking measures: cups, tablespoons, teaspoons, counts,
 **My recipes** belongs to this browser and origin, including its host and port. Clearing site data, using private browsing or opening another address does not share that collection. Export/import its JSON backup from Recipe List to move copies between browsers. Imports skip identical recipes; the collection holds up to 200 entries. Existing duplicate records are retained so their names and progress are not silently deleted.
 
 ## AI Pastry Chef
+
+**Hosted status:** the Chef backend is included, but the current Netlify Free project has no hosted OpenAI key configured. AI Pastry Chef remains unavailable until an approved credential setup is completed. Local batch multipliers, recipes, accounts, favorites and Analytics work independently of that provider credential.
 
 Create an email/password profile or sign in directly in the Chef section to unlock it. Describe a substitution, ingredients to avoid, a serving-size change or another adjustment. Three examples are selected from twelve relevant prompts, and the blue sparkle button in the fixed recipe header scrolls to the Chef.
 
@@ -71,7 +73,7 @@ The build creates the browser bundle in `dist/` and the server catalog/configura
 | Variable | Use |
 | --- | --- |
 | `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID` | Firebase public web-app configuration, available at build time. Enable Email/Password Authentication and Firestore in the same project. |
-| `OPENAI_API_KEY` | Server-only OpenAI credential. Configure it in the host's protected environment. |
+| `OPENAI_API_KEY` | OpenAI backend credential. Configure it only through an approved hosting-environment setup; the current Netlify Free deployment leaves it unset. |
 | `OPENAI_API_KEY_FILE` | Optional local-server alternative: a private text-file path read at runtime. |
 | `OPENAI_MODEL` | Server model override; the local default is `gpt-5-mini`. |
 | `PORT`, `HOST`, `CHEF_ALLOWED_HOSTS` | Local preview listener and allowed-host settings. |
@@ -85,7 +87,9 @@ The existing GitHub repository is **Somefatpickles/pastry-chef-app**. Netlify bu
 
 The existing production address is **https://pastry-chef-app.netlify.app/**. Its Netlify project is linked to this repository's **main** branch for production builds. The updated release is prepared for deployment; publication status is recorded in [release notes](docs/release-notes.md), with the exact deployment state available in the Netlify project dashboard.
 
-Configure the `VITE_FIREBASE_*` values in Netlify's **Builds** scope and `OPENAI_API_KEY` in the protected **Functions** runtime scope. `OPENAI_MODEL` is optional. The generated catalog and public Firebase authentication configuration are included in the function bundle; no Firebase administrator credential is required. Never upload local environment files or key-file contents as static assets.
+The current Netlify Free project retains its existing public `VITE_FIREBASE_*` variables with the plan's all-scopes configuration. The generated catalog and public Firebase authentication configuration are included in the function bundle; no Firebase administrator credential is required. `OPENAI_MODEL` is optional. Never upload local environment files or key-file contents as static assets.
+
+Granular **Functions-only** environment scopes require Netlify Pro. Before enabling the hosted Chef, the owner can choose that scope on Pro, approve a Free-compatible production-only key available to all Netlify scopes, or leave hosted AI inactive. The Free option makes the unprefixed key accessible to build and post-processing code as well as Functions; it does not automatically put the key in the Vite browser bundle. See [deployment](docs/deployment.md) for the configuration choices.
 
 Production Chef requests validate the Firebase account, restrict request origins and sizes, and use platform and durable per-account/global request limits. The quota store fails closed if unavailable. See [deployment](docs/deployment.md) for setup and limits, and [release notes](docs/release-notes.md) for the verified publication result.
 

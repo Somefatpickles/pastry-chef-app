@@ -4,7 +4,7 @@
 
 CrumbCraft brings the existing Pastry Chef App library into a complete baking workflow: choose a recipe, keep its ingredient checklist beside the method, adapt and save a distinct version, log each bake, and follow progress in a signed-in profile.
 
-The release includes all 68 reviewed recipes, generated recipe illustrations and twelve cookie assets; four-page navigation; household baking measures; local unique saves and renaming; favorites and completion filters; authenticated AI Pastry Chef; and dated repeat-bake history with Analytics.
+The release includes all 68 reviewed recipes, generated recipe illustrations and twelve cookie assets; four-page navigation; household baking measures; local unique saves and renaming; favorites and completion filters; the authenticated AI Pastry Chef backend; and dated repeat-bake history with Analytics. Hosted AI availability depends on the credential setup described below.
 
 ## Publication
 
@@ -18,7 +18,9 @@ The release includes all 68 reviewed recipes, generated recipe illustrations and
 
 **Release state:** prepared for production deployment. Netlify authentication and the existing project's GitHub **main** production connection were verified. The production URL was verified to serve the earlier build before this update; that check alone does not confirm publication of the new build. The Netlify project dashboard records the exact deployment status and source revision.
 
-Firebase public configuration belongs in Netlify's **Builds** scope. `OPENAI_API_KEY` belongs only in the protected **Functions** runtime scope; `OPENAI_MODEL` is optional. The build generates the catalog and public Firebase configuration included in the function bundle. The local preview server remains a separate development option. The production adapter validates Firebase sessions and uses native request limits plus a durable Netlify Blobs quota. See [deployment](deployment.md) for setup and production checks.
+**Hosted AI status:** no OpenAI key is configured on the existing Netlify Free project, so AI Pastry Chef remains unavailable pending an approved credential setup. Granular Functions-only scopes require Pro. The owner can choose Pro Functions-only configuration, approve a production-only Free variable accessible to build/post-processing and Functions, or leave hosted AI inactive. No key is included in source or static assets.
+
+Existing public Firebase variables remain in their Free-compatible all-scopes configuration. The build generates the catalog and public Firebase configuration included in the function bundle; `OPENAI_MODEL` is optional. The local preview server remains a separate development option. The production adapter validates Firebase sessions and uses native request limits plus a durable Netlify Blobs quota. See [deployment](deployment.md) for setup and production checks.
 
 ## Verification
 

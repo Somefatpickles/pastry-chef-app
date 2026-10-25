@@ -27,14 +27,22 @@ The standalone `server.mjs` is the local/LAN preview server. Netlify does not ex
 
 ## Environment variables
 
-Set values in the existing Netlify project's environment configuration. Apply production values to the production deploy context, and configure any preview context intentionally.
+The existing project is on **Netlify Free**. Granular environment scopes are a Pro feature. Its existing public Firebase settings remain in their all-scopes/all-contexts configuration, and **no hosted OpenAI credential is configured**. The packaged backend is ready, but AI Pastry Chef reports unavailable until the owner chooses an approved credential setup. Recipe browsing, local batch scaling, accounts, favorites, history and Analytics do not need that provider key.
 
-| Variables | Netlify scope | Notes |
+Set values in the existing project's environment configuration and configure production/preview contexts intentionally.
+
+| Variables | Use and scope | Notes |
 | --- | --- | --- |
-| `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID` | **Builds** | Public Firebase web-app configuration. The browser and generated backend auth configuration must use the same Firebase project. |
-| `OPENAI_API_KEY` | Protected **Functions** runtime | The server-only OpenAI key. Do not give it a `VITE_` prefix or include it in static files. |
-| `OPENAI_MODEL` | **Functions** runtime, optional | Override the default `gpt-5-mini` model. |
-| `CHEF_ALLOWED_ORIGINS` | **Functions** runtime, optional | Comma-separated additional trusted HTTPS origins. Normal Netlify production, deploy and deploy-preview origins are detected from platform metadata. |
+| `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID` | Build-time public configuration; existing Free project uses all scopes | The browser and generated backend auth configuration must use the same Firebase project. |
+| `OPENAI_API_KEY` | Backend credential; **Functions-only** scope on Pro, or owner-approved broader Free scope | Currently unset on the hosted project. Do not give it a `VITE_` prefix or include it in static files. |
+| `OPENAI_MODEL` | Optional server configuration | Override the default `gpt-5-mini` model. |
+| `CHEF_ALLOWED_ORIGINS` | Optional server configuration | Comma-separated additional trusted HTTPS origins. Normal Netlify production, deploy and deploy-preview origins are detected from platform metadata. |
+
+Before enabling the hosted Chef, choose one of these configurations:
+
+- **Pro:** configure the key with a Functions-only runtime scope.
+- **Free:** approve a production-only, unprefixed environment variable available to all Netlify scopes. Build and post-processing code can access it as well as Functions; the lack of a `VITE_` prefix prevents automatic inclusion by Vite, but does not restrict access by those build stages.
+- **No hosted provider credential:** leave AI Pastry Chef inactive while the other app features remain usable.
 
 `OPENAI_API_KEY_FILE` is a local-server alternative. A developer workstation's filesystem path is not a hosted runtime credential. Keep `.env*`, private key files, QA session artifacts and generated output out of Git.
 
@@ -63,7 +71,7 @@ Personal recipe copies remain local to each browser and origin. Export them from
 
 ## Publish and verify
 
-Use the existing Netlify project rather than creating a replacement. Confirm its linked GitHub repository/production branch, build settings and protected runtime variables, then publish the reviewed revision through the project's deployment workflow.
+Use the existing Netlify project rather than creating a replacement. Confirm its linked GitHub repository/production branch, build settings and any approved environment-variable configuration, then publish the reviewed revision through the project's deployment workflow. Publishing without an OpenAI key leaves the hosted Chef unavailable; it does not block the static app or Firebase profile features.
 
 Release preparation verified the Git connection above and packaged all three Node.js 24 Functions with Netlify's official packaging SDK. The resulting manifests included the API routes, native limit and hourly schedule. Bundle contents excluded local environment files, logs and private QA artifacts; only the required runtime JSON data was included. Extracted packaged handlers rejected a guest Chef request with **401** and returned a safe **200** status response without making a provider request. These are packaging/runtime checks, distinct from observing the updated build live.
 

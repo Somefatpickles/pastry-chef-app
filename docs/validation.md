@@ -11,6 +11,9 @@ The app owner confirmed that cloud sync is functioning as intended on **October 
 | Netlify adapter/quota tests | **15 passed**, included above | Authenticated route behavior, request/origin controls, bounded processing, durable quota claims and cleanup behavior |
 | Official Netlify function packaging | Passed | Three API v2 Node.js 24 bundles; expected route/limit/schedule metadata; no local environment files, logs or private QA artifacts |
 | Extracted packaged handlers | Passed | Guest Chef request **401**, safe status **200**, no provider calls |
+| Published Netlify deployment | Ready and published | Application revision `9a308ad`, deployment `6ade3ce2773f7ef622d37de7`, at [the production URL](https://pastry-chef-app.netlify.app/) |
+| Production HTTP smoke checks | **32 passed, 0 failed** | App/assets, three artwork samples, checked secret patterns, private-file **404**, guest/forged-token **401**, cross-origin **403** and Chef availability |
+| Hosted Chef status | **200**, `available: true`, `gpt-5-mini` | Verified runtime configuration health; no account signup or paid provider request |
 | TypeScript and production build | Passed | Final security-patched dependencies, browser bundle and generated server catalog/configuration |
 | Dependency audit | **0 vulnerabilities reported** | Fresh network-backed `npm audit` after compatible build-tool updates and the scoped same-major Firestore Node gRPC override |
 | LAN smoke checks | **20 passed** at the network-review baseline | Built assets, status, guest/forged-token rejection, cross-origin rejection, private-file routes and checked asset secret patterns |
@@ -25,7 +28,7 @@ The final build uses Vite **7.3.7**, source-map-js **1.2.2** and the scoped Node
 
 Deployment-specific validation and publication status belong in [release notes](release-notes.md). Successful tests/builds do not by themselves establish that the Netlify project has published the updated build.
 
-The existing Netlify project, production URL and GitHub **main** connection were verified during release preparation. At that verification point it still served the earlier release, so no updated-publication claim follows from the connection check alone.
+The existing Netlify project, production URL and GitHub **main** connection were verified during release preparation. The updated application was then observed ready/published and passed the production HTTP checks above. Exact subsequent deployment states remain available in the project dashboard.
 
 ## What the checks establish
 
@@ -41,6 +44,7 @@ The initial LAN backend review made actual OpenAI requests for a coconut-oil ada
 - Chromium viewport checks do not establish Safari behavior or every physical-device/browser combination.
 - Automated account/browser checks used fixtures rather than creating live user accounts. Cloud sync was separately confirmed by the app owner.
 - The automated negative Chef-access checks exercised the actual LAN server. A passing local check does not by itself establish the production host's secrets, authorization, limits or routing.
+- The production HTTP checks separately verified hosted status and negative authorization/origin boundaries. They did not create a live account or make a paid-provider request, so they do not establish a successful production recipe-generation response.
 - The browser bundle includes Firebase and the recipe catalog. Its current build-size warning is a performance consideration for slower connections.
 - The optional published Firestore subcollection rules and the compatible profile-document fallback have different storage capacity. The fallback is subject to Firestore's document-size limit; local data is retained when synchronization fails.
 

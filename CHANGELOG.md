@@ -26,6 +26,6 @@
 
 ### Validation
 
-Release verification passed **223 automated tests**, including 15 Netlify adapter/quota tests, and the TypeScript/production build. A fresh network-backed dependency audit reported **0 vulnerabilities**. The network-review baseline also passed 20 LAN checks, four Chromium viewport sizes and reduced motion. The app owner confirmed cloud sync. See [validation](docs/validation.md) and [release notes](docs/release-notes.md) for scope and deployment verification.
+Release verification passed **223 automated tests**, including 15 Netlify adapter/quota tests, and the TypeScript/production build. A fresh network-backed dependency audit reported **0 vulnerabilities**. The published Netlify application passed **32 production HTTP checks**, including hosted Chef availability and negative access boundaries, without a paid provider request. The network-review baseline also passed 20 LAN checks, four Chromium viewport sizes and reduced motion. The app owner confirmed cloud sync. See [validation](docs/validation.md) and [release notes](docs/release-notes.md) for scope and deployment verification.
 
 The recipes and AI variants have not been kitchen tested as part of this release.

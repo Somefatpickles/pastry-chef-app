@@ -2,14 +2,14 @@
 
 A baking companion by **Pixel & Principle**: learn from 68 pastry recipes, keep an ingredient checklist beside the method, adapt a bake with an AI Pastry Chef, and follow your practice over time.
 
-[App URL](https://pastry-chef-app.netlify.app/) · [Repository](https://github.com/Somefatpickles/pastry-chef-app) · [Release notes](docs/release-notes.md) · [Deployment](docs/deployment.md) · [Recipe review](docs/recipe-review.md) · [Validation](docs/validation.md)
+[Live app](https://pastry-chef-app.netlify.app/) · [Repository](https://github.com/Somefatpickles/pastry-chef-app) · [Release notes](docs/release-notes.md) · [Deployment](docs/deployment.md) · [Recipe review](docs/recipe-review.md) · [Validation](docs/validation.md)
 
 ## The app
 
 | Page | What you can do |
 | --- | --- |
 | **Recipe List** | Browse the library or **My recipes**, search titles and ingredients, and combine Category, Skill level, Status and Favorites filters. Star a recipe beside its title without opening it. |
-| **Current Recipe** | Follow preparation, method, doneness and storage guidance. Open **Ingredient List / Save** for a separate scrolling checklist, batch multiplier and save controls. Log each finished bake and use the AI Pastry Chef below the review section when its hosted credential is configured. |
+| **Current Recipe** | Follow preparation, method, doneness and storage guidance. Open **Ingredient List / Save** for a separate scrolling checklist, batch multiplier and save controls. Log each finished bake and use the AI Pastry Chef below the review section after signing in. |
 | **Profile** | Create an email/password account, sign in, save a first name, and check library-progress and baking-history sync. |
 | **Analytics** | After sign-in, explore stacked bars with a cumulative line, date ranges, daily/weekly/monthly groups, category filters and dated bake history. |
 
@@ -31,7 +31,7 @@ Recipes display household baking measures: cups, tablespoons, teaspoons, counts,
 
 ## AI Pastry Chef
 
-**Hosted status:** the Chef backend is included, but the current Netlify Free project has no hosted OpenAI key configured. AI Pastry Chef remains unavailable until an approved credential setup is completed. Local batch multipliers, recipes, accounts, favorites and Analytics work independently of that provider credential.
+**Hosted setup:** the Netlify deployment is published, and the hosted Chef status reports available with `gpt-5-mini`. The existing Free project has an owner-approved, production-only OpenAI credential configured. On this plan it is available to build/post-processing code and Functions; it is unprefixed and is not automatically included in the Vite browser bundle. Production checks verified configuration health and access controls without making a paid provider request.
 
 Create an email/password profile or sign in directly in the Chef section to unlock it. Describe a substitution, ingredients to avoid, a serving-size change or another adjustment. Three examples are selected from twelve relevant prompts, and the blue sparkle button in the fixed recipe header scrolls to the Chef.
 
@@ -73,7 +73,7 @@ The build creates the browser bundle in `dist/` and the server catalog/configura
 | Variable | Use |
 | --- | --- |
 | `VITE_FIREBASE_API_KEY`, `VITE_FIREBASE_AUTH_DOMAIN`, `VITE_FIREBASE_PROJECT_ID`, `VITE_FIREBASE_STORAGE_BUCKET`, `VITE_FIREBASE_MESSAGING_SENDER_ID`, `VITE_FIREBASE_APP_ID` | Firebase public web-app configuration, available at build time. Enable Email/Password Authentication and Firestore in the same project. |
-| `OPENAI_API_KEY` | OpenAI backend credential. Configure it only through an approved hosting-environment setup; the current Netlify Free deployment leaves it unset. |
+| `OPENAI_API_KEY` | OpenAI backend credential. The current Netlify Free project uses the owner-approved production-only environment configuration described below. |
 | `OPENAI_API_KEY_FILE` | Optional local-server alternative: a private text-file path read at runtime. |
 | `OPENAI_MODEL` | Server model override; the local default is `gpt-5-mini`. |
 | `PORT`, `HOST`, `CHEF_ALLOWED_HOSTS` | Local preview listener and allowed-host settings. |
@@ -85,17 +85,17 @@ For local Chef use, an ignored `.env.server` can supply server settings. Never p
 
 The existing GitHub repository is **Somefatpickles/pastry-chef-app**. Netlify builds with `npm run build`, publishes `dist` and bundles the authenticated Chef as Node.js 24 Functions at `/api/chef` and `/api/chef/status`. Hash-based page navigation requires no catch-all redirect. The local LAN server remains available for development.
 
-The existing production address is **https://pastry-chef-app.netlify.app/**. Its Netlify project is linked to this repository's **main** branch for production builds. The updated release is prepared for deployment; publication status is recorded in [release notes](docs/release-notes.md), with the exact deployment state available in the Netlify project dashboard.
+The published app is **https://pastry-chef-app.netlify.app/**. Its Netlify project is linked to this repository's **main** branch for production builds. The release source is published to GitHub, and the production application passed **32 HTTP smoke checks**. Publication details are recorded in [release notes](docs/release-notes.md); the project dashboard records subsequent deployments.
 
 The current Netlify Free project retains its existing public `VITE_FIREBASE_*` variables with the plan's all-scopes configuration. The generated catalog and public Firebase authentication configuration are included in the function bundle; no Firebase administrator credential is required. `OPENAI_MODEL` is optional. Never upload local environment files or key-file contents as static assets.
 
-Granular **Functions-only** environment scopes require Netlify Pro. Before enabling the hosted Chef, the owner can choose that scope on Pro, approve a Free-compatible production-only key available to all Netlify scopes, or leave hosted AI inactive. The Free option makes the unprefixed key accessible to build and post-processing code as well as Functions; it does not automatically put the key in the Vite browser bundle. See [deployment](docs/deployment.md) for the configuration choices.
+Granular **Functions-only** environment scopes require Netlify Pro. The owner approved the current Free-compatible setup: `OPENAI_API_KEY` and `OPENAI_MODEL` are production-only variables available to all Netlify scopes. Build and post-processing code can access them as well as Functions. The key has no `VITE_` prefix and is not automatically included in the browser bundle. Existing public Firebase variables, their scopes and contexts were preserved. See [deployment](docs/deployment.md) for configuration details.
 
 Production Chef requests validate the Firebase account, restrict request origins and sizes, and use platform and durable per-account/global request limits. The quota store fails closed if unavailable. See [deployment](docs/deployment.md) for setup and limits, and [release notes](docs/release-notes.md) for the verified publication result.
 
 ## Verification and recipe provenance
 
-Release verification passed **223 automated tests** and the TypeScript/production build. A fresh network-backed `npm audit` reported **0 vulnerabilities** after compatible dependency updates. The earlier network-review baseline passed **20 LAN checks**; isolated Chromium checks covered **375×812, 320×568, 1280×800 and 844×390**, plus reduced motion, including account isolation, favorites, repeated completion logs, chart totals, saves and drawer behavior. The app owner separately confirmed that cloud sync functions as intended on **October 25, 2026**.
+Release verification passed **223 automated tests**, the TypeScript/production build and **32 production HTTP checks**. A fresh network-backed `npm audit` reported **0 vulnerabilities** after compatible dependency updates. The earlier network-review baseline passed **20 LAN checks**; isolated Chromium checks covered **375×812, 320×568, 1280×800 and 844×390**, plus reduced motion, including account isolation, favorites, repeated completion logs, chart totals, saves and drawer behavior. The app owner separately confirmed that cloud sync functions as intended on **October 25, 2026**.
 
 These checks establish software behavior and editorial coverage. They do not establish kitchen results, Safari behavior or physical-device coverage. The initial backend review also exercised actual OpenAI substitution/clarification requests; later browser account flows used isolated fixtures. Current and historical evidence is separated in [validation](docs/validation.md).
 

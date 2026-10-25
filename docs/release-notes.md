@@ -16,9 +16,9 @@ The release includes all 68 reviewed recipes, generated recipe illustrations and
 - Browser output: `dist/`
 - Backend: Node.js 24 Netlify Functions at `/api/chef` and `/api/chef/status`
 
-**Release state:** prepared for production deployment. Netlify authentication and the existing project's GitHub **main** production connection were verified. The production URL was verified to serve the earlier build before this update; that check alone does not confirm publication of the new build. The Netlify project dashboard records the exact deployment status and source revision.
+**Published and verified:** the application is live at [pastry-chef-app.netlify.app](https://pastry-chef-app.netlify.app/). Netlify deployment `6ade3ce2773f7ef622d37de7` was ready and published for application revision [`9a308ad`](https://github.com/Somefatpickles/pastry-chef-app/commit/9a308adacf0504f25670f29eaff4740bc2bf70ae). GitHub **main** and its verified production Git connection remain the source for subsequent builds; documentation-only commits can advance that branch without changing the verified application code.
 
-**Hosted AI status:** no OpenAI key is configured on the existing Netlify Free project, so AI Pastry Chef remains unavailable pending an approved credential setup. Granular Functions-only scopes require Pro. The owner can choose Pro Functions-only configuration, approve a production-only Free variable accessible to build/post-processing and Functions, or leave hosted AI inactive. No key is included in source or static assets.
+**Hosted AI configuration:** production `/api/chef/status` returned **200**, `available: true` and model `gpt-5-mini`. The owner approved the existing Netlify Free plan's production-only OpenAI key/model variables with all-scopes access. Build/post-processing code and Functions can access these values; this is not Functions-only isolation. The unprefixed key is held in Netlify's standard encrypted environment storage and is not automatically included by Vite or placed in source/static assets.
 
 Existing public Firebase variables remain in their Free-compatible all-scopes configuration. The build generates the catalog and public Firebase configuration included in the function bundle; `OPENAI_MODEL` is optional. The local preview server remains a separate development option. The production adapter validates Firebase sessions and uses native request limits plus a durable Netlify Blobs quota. See [deployment](deployment.md) for setup and production checks.
 
@@ -28,9 +28,11 @@ Final release verification passed **223 automated tests** and the TypeScript/pro
 
 Official Netlify packaging produced all three API v2 Node.js 24 Function bundles with the expected routes, native request limit and hourly cleanup schedule. The bundles excluded environment files, logs and private QA artifacts. Extracted handlers passed guest rejection (**401**) and safe status (**200**) checks without a provider request. Published HTTP checks remain separate from these preparation checks.
 
+The published application passed **32 of 32 production HTTP smoke checks**, including app/assets, three artwork samples, checked asset secret patterns, blocked private-file routes (**404**), guest and forged-token rejection (**401**, including Google verification), cross-origin rejection (**403**) and hosted Chef availability. These checks created no accounts and made no paid OpenAI requests. They establish deployment/configuration health and the server's access boundary; they do not claim a successful paid-provider recipe response.
+
 The completed network review passed **20 LAN checks**, four Chromium viewport sizes and reduced motion. Those browser flows covered welcome transitions, four-page navigation, stars/filters, repeat bake records, account isolation, reload persistence, chart/table totals, local saves and drawer scrolling. Browser asset hashes were unchanged by the final hosting/dependency maintenance.
 
-The app owner separately confirmed that cloud sync works as intended on **October 25, 2026**. Automated account/browser checks used isolated fixtures. Production deployment checks must be recorded above separately from this baseline.
+The app owner separately confirmed that cloud sync works as intended on **October 25, 2026**. Automated account/browser checks used isolated fixtures. The production HTTP checks above supplement that earlier browser baseline.
 
 ## Existing data
 

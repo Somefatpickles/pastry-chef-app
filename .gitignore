@@ -1,5 +1,8 @@
 node_modules/
 dist/
+.server/
+.netlify/
+artifacts/
 
 .env
 .env.*

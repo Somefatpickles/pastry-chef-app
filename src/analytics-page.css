@@ -1,0 +1,84 @@
+.analytics-shell { display: grid; gap: 22px; padding: 24px; min-width: 0; }
+.analytics-heading { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+.analytics-sync { flex: 0 1 auto; border: 1px solid #d6c6ae; border-radius: 20px; padding: 8px 11px; background: #f6eddf; color: #6e5542; font-size: .72rem; line-height: 1.45; }
+.analytics-sync.needs-attention { border-color: #d5af91; background: #fff1e4; color: #8c4c28; }
+.analytics-sync-retry { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding: 12px 14px; border: 1px solid #e0c4a8; border-radius: 12px; background: #fff3e4; }
+.analytics-sync-retry p { flex: 1; min-width: 180px; margin: 0; color: #835438; font-size: .77rem; line-height: 1.6; }
+.analytics-controls { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.analytics-controls .field-label { min-width: 0; }
+.analytics-controls select { min-width: 0; width: 100%; min-height: 44px; font-size: 16px; }
+.analytics-totals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.analytics-totals > div { min-width: 0; padding: 18px; border: 1px solid #dfcdb7; border-radius: 16px; background: linear-gradient(145deg, #fffaf1, #f6e9d7); }
+.analytics-totals span { display: block; color: #735642; font-size: .77rem; line-height: 1.4; }
+.analytics-totals strong { display: block; margin-top: 8px; color: #75432b; font-family: "Fraunces", Georgia, serif; font-size: 2rem; font-weight: 600; line-height: 1.15; overflow-wrap: anywhere; }
+.analytics-totals .analytics-latest-date { font-family: inherit; font-size: 1.05rem; line-height: 1.5; margin-top: 10px; }
+.analytics-chart-card { min-width: 0; padding: 22px; border: 1px solid #dfcdb7; border-radius: 20px; background: #fffdf8; }
+.analytics-chart-card h2, .analytics-history h2 { margin: 0; color: #603a26; font-family: "Fraunces", Georgia, serif; font-size: 1.65rem; line-height: 1.2; }
+.analytics-chart-card header p, .analytics-history header p { margin: 9px 0 0; color: #765b47; font-size: .83rem; line-height: 1.65; }
+.analytics-chart-viewport { min-width: 0; width: 100%; margin-top: 12px; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+.analytics-chart { display: block; overflow: visible; font-family: inherit; max-width: none; touch-action: pan-x pan-y pinch-zoom; }
+.analytics-axis-label, .analytics-axis-caption { fill: #7a6655; font-size: 11px; }
+.analytics-axis-caption { font-size: 11px; font-weight: 700; }
+.analytics-line-caption { fill: #24577e; }
+.analytics-grid-line { stroke: #e5d9ca; stroke-width: 1; stroke-dasharray: 3 5; }
+.analytics-bucket { cursor: pointer; outline: none; }
+.analytics-bucket.is-selected .analytics-bucket-hit { fill: #e9dfd12b; }
+.analytics-bucket:focus-visible .analytics-bucket-hit { fill: #e4ecf180; stroke: #24577e; stroke-width: 1.5; }
+.analytics-bar { pointer-events: none; }
+.analytics-scroll-hint { margin: 8px 0 0; color: #795b46; font-size: .74rem; }
+.analytics-legend { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 16px; }
+.analytics-legend > span { display: inline-flex; align-items: center; gap: 7px; color: #6e5140; font-size: .74rem; line-height: 1.45; }
+.analytics-legend i { display: inline-block; width: 11px; height: 11px; flex: 0 0 11px; border-radius: 3px; }
+.analytics-legend .analytics-legend-line { width: 20px; height: 3px; flex-basis: 20px; border-radius: 1px; background: #24577e; }
+.analytics-period-detail { display: grid; gap: 6px; min-height: 74px; padding: 13px 15px; margin-top: 18px; border: 1px solid #d5e2ec; border-radius: 12px; background: #f0f6fa; color: #31556e; font-size: .8rem; line-height: 1.5; }
+.analytics-period-detail strong { font-size: .85rem; }
+.analytics-period-detail p { margin: 0; font-size: .75rem; }
+.analytics-data-table { margin-top: 16px; }
+.analytics-data-table summary { font-size: .8rem; }
+.analytics-table-scroll { overflow: auto; margin-top: 8px; max-height: 420px; border: 1px solid #dfcdb7; border-radius: 10px; overscroll-behavior: contain; }
+.analytics-table-scroll table { width: 100%; border-collapse: collapse; font-size: .77rem; white-space: nowrap; }
+.analytics-table-scroll caption { padding: 10px; background: #f7eddf; color: #6c4a32; text-align: left; font-weight: 700; }
+.analytics-table-scroll th, .analytics-table-scroll td { padding: 10px 12px; border-bottom: 1px solid #eadfd1; text-align: right; color: #664a37; }
+.analytics-table-scroll th { font-weight: 700; }
+.analytics-table-scroll th:first-child { text-align: left; }
+.analytics-table-scroll thead { background: #faf3e9; }
+.analytics-table-scroll tbody tr:last-child > * { border-bottom: 0; }
+.analytics-range-note { margin: 18px 0 0; padding-top: 12px; border-top: 1px solid #eadfd1; color: #80664f; font-size: .72rem; line-height: 1.55; }
+.analytics-empty { display: grid; justify-items: center; gap: 12px; padding: 42px 18px; text-align: center; }
+.analytics-empty > span { color: #b27b46; font-size: 2.2rem; }
+.analytics-empty h3 { margin: 0; color: #6b422c; font-family: "Fraunces", Georgia, serif; font-size: 1.5rem; }
+.analytics-empty p { max-width: 48ch; margin: 0; color: #7c5c46; font-size: .85rem; line-height: 1.7; }
+.analytics-history { min-width: 0; }
+.analytics-history ol { display: grid; gap: 10px; padding: 0; margin: 18px 0 0; list-style: none; }
+.analytics-history li { display: flex; align-items: center; justify-content: space-between; min-width: 0; gap: 12px; padding: 15px 16px; border: 1px solid #dfcdb7; border-radius: 14px; background: #fcf6ed; }
+.analytics-history li > div { min-width: 0; }
+.analytics-history li strong { display: block; color: #67412b; font-size: .9rem; line-height: 1.5; overflow-wrap: anywhere; }
+.analytics-history time { display: block; margin-top: 3px; color: #7e604b; font-size: .76rem; line-height: 1.5; }
+.analytics-history li p { display: flex; flex-wrap: wrap; gap: 6px; margin: 7px 0 0; }
+.analytics-history li p span { padding: 3px 7px; border-radius: 7px; background: #efe2d0; color: #79593f; font-size: .66rem; line-height: 1.45; }
+.analytics-remove { display: grid; place-items: center; flex: 0 0 44px; width: 44px; min-height: 44px; padding: 10px; border: 1px solid #dcc4ad; border-radius: 10px; background: #f5e8d7; color: #9b5031; }
+.analytics-remove:hover { background: #eddbc6; }
+.analytics-show-more { margin-top: 14px; }
+.analytics-account-gate { display: grid; justify-items: center; gap: 18px; max-width: 640px; margin: 16px auto; padding: 40px 26px; border: 1px solid #d9c1a4; border-radius: 24px; background: linear-gradient(145deg, #fffaf2, #f5e7d3); text-align: center; }
+.analytics-gate-icon { width: 64px; height: 64px; color: #95623a; }
+.analytics-account-gate h2 { margin: 0; color: #6e422a; font-family: "Fraunces", Georgia, serif; font-size: clamp(1.7rem, 4vw, 2.15rem); line-height: 1.2; }
+.analytics-account-gate p { max-width: 46ch; margin: 0; color: #76573f; font-size: .9rem; line-height: 1.75; }
+.analytics-account-gate .analytics-gate-note { font-size: .76rem; }
+.analytics-account-gate .completion-button { margin-top: 3px; min-height: 48px; padding: 13px 20px; }
+@media (max-width: 720px) {
+  .analytics-shell { gap: 18px; padding: 16px 12px; }
+  .analytics-heading { flex-direction: column; gap: 10px; }
+  .analytics-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
+  .analytics-totals { gap: 7px; }
+  .analytics-totals > div { padding: 12px 9px; border-radius: 12px; }
+  .analytics-totals span { font-size: .67rem; }
+  .analytics-totals strong { font-size: 1.75rem; }
+  .analytics-totals .analytics-latest-date { font-size: .76rem; line-height: 1.55; margin-top: 8px; }
+  .analytics-chart-card { padding: 17px 10px; border-radius: 16px; }
+  .analytics-chart-card h2, .analytics-history h2 { font-size: 1.5rem; }
+  .analytics-chart-card header p, .analytics-history header p { font-size: .78rem; }
+  .analytics-history li { padding: 12px; }
+  .analytics-history li strong { font-size: .84rem; }
+  .analytics-account-gate { padding: 30px 18px; margin: 10px 0; gap: 16px; }
+  .analytics-account-gate p { font-size: .84rem; }
+}

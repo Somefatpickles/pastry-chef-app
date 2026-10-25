@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owns(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+    function validCompletion() {
+      let value = request.resource.data;
+      return value.keys().hasAll(['id', 'recipeId', 'sourceRecipeId', 'title', 'difficulty', 'category', 'completedAt'])
+        && value.keys().hasOnly(['id', 'recipeId', 'sourceRecipeId', 'title', 'difficulty', 'category', 'completedAt', 'deletedAt', 'legacy', 'updatedServerAt'])
+        && value.id is string && value.id.matches('^[A-Za-z0-9_-]{1,200}$')
+        && value.recipeId is string && value.recipeId.size() > 0 && value.recipeId.size() <= 500
+        && value.sourceRecipeId is string && value.sourceRecipeId.size() > 0 && value.sourceRecipeId.size() <= 160
+        && value.title is string && value.title.size() > 0 && value.title.size() <= 240
+        && value.difficulty in ['Novice', 'Intermediate', 'Experienced', 'Challenges']
+        && value.category is string && value.category.size() > 0 && value.category.size() <= 200
+        && value.completedAt is string && value.completedAt.size() <= 64
+        && (!('deletedAt' in value) || (value.deletedAt is string && value.deletedAt.size() <= 64))
+        && (!('legacy' in value) || value.legacy is bool);
+    }
+    function validFavorite() {
+      return request.resource.data.keys().hasAll(['recipeId', 'favorite', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['recipeId', 'favorite', 'updatedAt', 'updatedServerAt'])
+        && request.resource.data.recipeId is string && request.resource.data.recipeId.size() > 0 && request.resource.data.recipeId.size() <= 500
+        && request.resource.data.favorite is bool && request.resource.data.updatedAt is string && request.resource.data.updatedAt.size() <= 64;
+    }
+    match /bakingProfiles/{userId} {
+      // Retain the existing progress document and legacy activity-map fallback.
+      allow read, write: if owns(userId);
+      match /completions/{completionId} {
+        allow read: if owns(userId);
+        allow create: if owns(userId) && validCompletion() && request.resource.data.id == completionId;
+        // History snapshots are immutable; undo is a retained deletion marker.
+        allow update: if owns(userId) && validCompletion() && request.resource.data.id == completionId
+          && (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['deletedAt', 'updatedServerAt'])
+            || (!('legacy' in resource.data) && request.resource.data.legacy == false && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['deletedAt', 'legacy', 'updatedServerAt']))
+            || ('legacy' in resource.data && resource.data.legacy == true && request.resource.data.legacy == false && request.resource.data.recipeId == resource.data.recipeId && request.resource.data.completedAt == resource.data.completedAt))
+          && (!('deletedAt' in resource.data) || ('deletedAt' in request.resource.data && request.resource.data.deletedAt >= resource.data.deletedAt));
+        allow delete: if false;
+      }
+      match /favorites/{recipeId} {
+        allow read: if owns(userId);
+        allow create: if owns(userId) && validFavorite();
+        allow update: if owns(userId) && validFavorite() && request.resource.data.updatedAt >= resource.data.updatedAt;
+        allow delete: if false;
+      }
+    }
+  }
+}

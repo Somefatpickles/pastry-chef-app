@@ -5,10 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "node scripts/build.mjs",
+    "preview": "vite preview",
+    "start": "node server.mjs",
+    "test": "node --test --test-isolation=none tests/*.test.mjs"
   },
   "dependencies": {
+    "@netlify/blobs": "11.1.6",
     "firebase": "^12.19.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
@@ -19,5 +22,10 @@
     "@vitejs/plugin-react": "^5.0.2",
     "typescript": "^5.9.2",
     "vite": "^7.1.2"
+  },
+  "overrides": {
+    "@firebase/firestore": {
+      "@grpc/grpc-js": "^1.13.6"
+    }
   }
 }

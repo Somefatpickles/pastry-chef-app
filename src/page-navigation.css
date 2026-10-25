@@ -1,0 +1,107 @@
+.app-pages {
+  --bottom-navigation-height: 70px;
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.app-page-stage {
+  position: absolute;
+  inset: 0 0 calc(var(--bottom-navigation-height) + env(safe-area-inset-bottom, 0px));
+  overflow: hidden;
+}
+
+.app-page {
+  position: absolute;
+  inset: 0;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding-top: 16px;
+  padding: calc(24px + env(safe-area-inset-top, 0px)) 24px 24px;
+  transform: translateX(calc(var(--page-offset) * 100%));
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform 340ms cubic-bezier(.22, .68, .25, 1), visibility 0s linear 340ms;
+  will-change: transform;
+}
+
+.app-page.is-active {
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 0s;
+}
+
+.app-pages.has-recipe-header .app-page-current {
+  top: calc(var(--recipe-bar-height, 54px) + env(safe-area-inset-top, 0px));
+  padding-top: 20px;
+}
+
+.app-page-content {
+  width: min(100%, 1200px);
+  min-height: 100%;
+  margin: 0 auto;
+}
+
+
+.bottom-navigation {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 70;
+  border-top: 1px solid #cbb29a;
+  background: #fffaf3;
+  box-shadow: 0 -4px 18px #4727160c;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.bottom-navigation-inner {
+  height: var(--bottom-navigation-height);
+  width: min(100%, 720px);
+  margin: 0 auto;
+  padding: 5px 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 8px;
+}
+
+.bottom-navigation-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 44px;
+  min-width: 0;
+  padding: 7px 6px;
+  border-radius: 13px;
+  background: transparent;
+  color: #775440;
+  font-size: .72rem;
+  font-weight: 700;
+  line-height: 1.1;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+.bottom-navigation-item svg { width: 23px; height: 23px; }
+.bottom-navigation-item.is-active { color: #743a22; background: #f2e4d2; }
+.bottom-navigation-item:hover { background: #f6eddf; }
+.bottom-navigation-item:focus-visible { outline: 3px solid #bf7b4c; outline-offset: 0; }
+
+@media (max-width: 720px) {
+  .app-pages { --bottom-navigation-height: 66px; }
+  .app-page { padding: calc(12px + env(safe-area-inset-top, 0px)) 10px 18px; }
+  .app-pages.has-recipe-header .app-page-current { padding-top: 12px; }
+  .bottom-navigation-inner { gap: 5px; padding: 4px 8px; }
+  .bottom-navigation-item { gap: 3px; padding: 5px 2px; font-size: .64rem; border-radius: 11px; }
+  .bottom-navigation-item svg { width: 21px; height: 21px; }
+  .bottom-navigation-item span { display: flex; align-items: center; justify-content: center; min-height: 2.2em; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-page, .app-page.is-active, .bottom-navigation-item { transition: none; }
+}

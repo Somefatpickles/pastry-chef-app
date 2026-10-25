@@ -1,0 +1,47 @@
+.chef-panel .chef-account-title { margin: 0; color: #57321f; font-family: "Fraunces", Georgia, serif; font-size: 1.4rem; line-height: 1.2; }
+.chef-panel .chef-account-form { display: grid; gap: 16px; }
+.chef-panel .chef-account-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.chef-panel .chef-account-fields label { display: grid; gap: 7px; color: #654837; font-size: .84rem; font-weight: 700; }
+.chef-panel .chef-account-fields input { width: 100%; min-width: 0; min-height: 44px; padding: 11px 12px; border: 1px solid #cdb196; border-radius: 10px; background: #fffaf4; color: #332116; font-size: 16px; }
+.chef-panel .chef-account-form .button-row { align-items: center; }
+.chef-panel .chef-account-form button { min-height: 44px; }
+@media (max-width: 720px) {
+  .chef-panel .chef-account-fields { grid-template-columns: minmax(0, 1fr); }
+}
+
+.current-recipe-page .chef-panel {
+  border-color: #97bdf0;
+  background: linear-gradient(135deg, #edf5ff, #f6faff);
+  scroll-margin-top: 16px;
+}
+.current-recipe-page .chef-panel:focus-visible { outline: 3px solid #3572c0; outline-offset: 3px; }
+.current-recipe-page .chef-heading h3 { margin-top: 0; color: #154c9a; }
+.current-recipe-page .chef-panel > p,
+.current-recipe-page .chef-panel .chef-proposal,
+.current-recipe-page .chef-panel .chef-account-title,
+.current-recipe-page .chef-panel .chef-account-fields label,
+.current-recipe-page .chef-panel form > label { color: #254b78; }
+.current-recipe-page .chef-panel .chef-status { color: #28518a; background: #dceaff; }
+.current-recipe-page .chef-panel .chef-status.online { color: #154c9a; background: #d7e8ff; }
+.current-recipe-page .chef-panel .prompt-chips button {
+  border-color: #a9c7ef;
+  color: #154c9a;
+  background: #f8fbff;
+}
+.current-recipe-page .chef-panel .prompt-chips button:hover { background: #e2eeff; }
+.current-recipe-page .chef-panel .completion-button { background: #245f9f; color: #fff; }
+.current-recipe-page .chef-panel .secondary-button,
+.current-recipe-page .chef-panel .text-button { color: #154c9a; }
+.current-recipe-page .chef-panel .secondary-button { border-color: #a9c7ef; background: #f2f7ff; }
+.current-recipe-page .chef-panel .chef-account-fields input,
+.current-recipe-page .chef-panel textarea { border-color: #a6bfdc; background: #fbfdff; color: #243c59; }
+.current-recipe-page .chef-panel .chef-account-fields input:focus,
+.current-recipe-page .chef-panel textarea:focus { outline: 3px solid #b5d2f5; outline-offset: 2px; }
+.current-recipe-page .chef-panel .chef-footnote { color: #4b6688; border-color: #c4d7ee; }
+.current-recipe-page .chef-panel .chef-submit small,
+.current-recipe-page .chef-panel .busy-note { color: #4b6688; }
+.current-recipe-page .chef-panel a { color: #154c9a; }
+.current-recipe-page .chef-panel button:focus-visible { outline: 3px solid #b5d2f5; outline-offset: 2px; }
+.current-recipe-page .chef-panel .chef-proposal { border-color: #adc7e7; background: #f8fbff; }
+.current-recipe-page .chef-panel .chef-proposal .eyebrow { color: #28518a; }
+.current-recipe-page .chef-panel .considerations { border-color: #bad0eb; background: #e7f1ff; color: #254b78; }

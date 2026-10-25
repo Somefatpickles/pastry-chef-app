@@ -1,0 +1,23 @@
+.favorite-button {
+  display: inline-flex;
+  flex: 0 0 44px;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  min-height: 44px;
+  padding: 9px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: #957051;
+  touch-action: manipulation;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+}
+.favorite-button svg { display: block; width: 24px; height: 24px; }
+.favorite-button:hover { background: #f4e6d1; color: #885723; }
+.favorite-button.is-favorite { color: #97600f; background: #fff0c8; border-color: #d8b064; }
+.favorite-button.is-favorite:hover { background: #f9e3aa; }
+.favorite-button:focus-visible { outline: 3px solid #b87328; outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .favorite-button { transition: none; } }

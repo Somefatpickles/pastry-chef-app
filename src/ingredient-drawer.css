@@ -1,0 +1,91 @@
+.ingredient-drawer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #382318;
+  overflow: hidden;
+  overflow: clip;
+  overscroll-behavior: contain;
+}
+.ingredient-drawer:not([open]) { display: none; }
+.ingredient-drawer::backdrop { background: #2f211967; opacity: 0; transition: opacity 240ms ease; }
+.ingredient-drawer[data-stage="open"]::backdrop { opacity: 1; }
+.ingredient-drawer-panel {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(420px, 100%);
+  min-width: 0;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto minmax(80px, 1fr) auto;
+  padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(16px + env(safe-area-inset-bottom, 0px));
+  border-left: 1px solid #cfb69c;
+  background: #fffaf3;
+  box-shadow: -18px 0 50px #33201329;
+  transform: translateX(100%);
+  transition: transform 240ms cubic-bezier(.2, .8, .2, 1);
+  will-change: transform;
+  overflow: hidden;
+}
+.ingredient-drawer[data-stage="open"] .ingredient-drawer-panel { transform: translateX(0); }
+.ingredient-drawer-top { min-width: 0; }
+.ingredient-drawer-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex: 0 0 auto; }
+.ingredient-drawer-header h2 { margin-top: 7px; font-size: 1.65rem; line-height: 1.05; }
+.ingredient-drawer-header .eyebrow { font-size: .58rem; letter-spacing: .12em; }
+.ingredient-drawer-close { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 76px; min-height: 44px; padding: 9px 11px; border-radius: 10px; background: #eee0cf; color: #65412e; font-size: .77rem; font-weight: 700; flex: 0 0 auto; }
+.ingredient-drawer-recipe { margin-top: 12px; font-weight: 700; font-size: .9rem; line-height: 1.45; overflow-wrap: anywhere; flex: 0 0 auto; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.ingredient-drawer-help { margin: 4px 0 12px; color: #755547; font-size: .73rem; line-height: 1.5; }
+.ingredient-drawer-batch { margin: 12px 0; padding: 10px 0; border-top: 1px solid #e4d2c0; border-bottom: 1px solid #e4d2c0; }
+.ingredient-drawer-batch .batch-controls { display: flex; flex-wrap: nowrap; align-items: end; gap: 10px; }
+.ingredient-drawer-batch .batch-controls .field-label { width: 112px; flex: 0 0 112px; }
+.ingredient-drawer-batch .batch-controls > span { font-size: .72rem; line-height: 1.4; padding-bottom: 4px; }
+.ingredient-drawer-batch .batch-controls .text-button { margin-left: auto; font-size: .72rem; }
+.ingredient-drawer input { font-size: 16px; }
+.ingredient-drawer-save { min-width: 0; min-height: 0; max-height: min(35dvh, 240px); overflow-y: auto; overscroll-behavior: contain; border-top: 1px solid #d8c1aa; padding-top: 12px; margin-top: 12px; }
+.ingredient-drawer-save .save-controls { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 8px; }
+.ingredient-drawer-save .save-controls .field-label { min-width: 0; }
+.ingredient-drawer-save .save-controls .completion-button { width: auto; min-height: 44px; padding: 9px 12px; font-size: .76rem; }
+.ingredient-drawer-save .notice { margin-top: 8px; padding: 8px 10px; font-size: .74rem; line-height: 1.4; }
+.ingredient-drawer-save .drawer-save-feedback { margin-top: 8px; padding: 8px 10px; border-radius: 8px; background: #e9f0e1; color: #355332; font-size: .74rem; line-height: 1.4; }
+.ingredient-drawer-save .drawer-save-feedback[role="alert"] { color: #a03125; background: #fff0ea; }
+.ingredient-drawer-save .drawer-remove-saved { margin-top: 6px; padding: 5px 0; min-height: 36px; background: transparent; color: #973d30; font-size: .72rem; font-weight: 700; text-align: left; }
+.ingredient-drawer-save .danger-button { margin-top: 6px; font-size: .72rem; min-height: 30px; color: #973d30; }
+.ingredient-drawer-save details { margin-top: 6px; font-size: .72rem; }
+.ingredient-drawer-save summary { padding: 4px 0; }
+.ingredient-drawer-list .batch-guidance { margin: 0 0 12px; padding: 10px 12px; border-radius: 10px; background: #f1e7d8; color: #654435; font-size: .75rem; line-height: 1.5; }
+.ingredient-drawer-list .batch-guidance ul { margin: 8px 0 0; padding-left: 18px; }
+.ingredient-drawer-list .batch-guidance li + li { margin-top: 7px; }
+.ingredient-drawer-list { display: block; min-height: 0; max-height: 100%; min-width: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain; touch-action: pan-y pinch-zoom; -webkit-overflow-scrolling: touch; padding: 3px 5px 8px 3px; scrollbar-width: thin; scrollbar-gutter: stable; }
+.ingredient-drawer-list .check-item + .check-item { margin-top: 10px; }
+.ingredient-drawer-list .check-item { margin: 0; padding: 13px; gap: 12px; min-height: 48px; }
+.ingredient-drawer-list .check-item > span { min-width: 0; }
+.ingredient-drawer-list .check-item strong { font-size: .9rem; line-height: 1.4; }
+.ingredient-drawer-list .check-item small { font-size: .78rem; }
+.ingredient-drawer-list .measure-note { font-size: .69rem; }
+.ingredient-drawer-list:focus-visible { outline: 2px solid #bf7b4c; outline-offset: -2px; border-radius: 12px; }
+@media (max-width: 480px) {
+  .ingredient-drawer-panel { padding-right: 14px; padding-left: 14px; }
+}
+@media (max-height: 480px) {
+  .ingredient-drawer-panel { padding-top: calc(8px + env(safe-area-inset-top, 0px)); padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px)); }
+  .ingredient-drawer-header .eyebrow, .ingredient-drawer-help { display: none; }
+  .ingredient-drawer-header h2 { margin: 0; font-size: 1.4rem; }
+  .ingredient-drawer-recipe { margin-top: 3px; font-size: .76rem; -webkit-line-clamp: 1; }
+  .ingredient-drawer-batch { margin: 5px 0; padding: 5px 0; }
+  .ingredient-drawer-batch .field-label, .ingredient-drawer-save .field-label { gap: 3px; font-size: .68rem; }
+  .ingredient-drawer-batch .field-label input, .ingredient-drawer-save .field-label input { min-height: 38px; padding: 7px 9px; }
+  .ingredient-drawer-save { padding-top: 7px; margin-top: 6px; max-height: min(32dvh, 130px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ingredient-drawer::backdrop, .ingredient-drawer-panel { transition: none; }
+}

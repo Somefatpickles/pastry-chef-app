@@ -1,0 +1,130 @@
+.app-reveal {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.app-reveal.is-welcome,
+.app-reveal.is-fading {
+  filter: blur(14px);
+  opacity: .36;
+  transform: scale(1.025);
+  pointer-events: none;
+}
+
+.app-reveal.is-focusing {
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1);
+  transition: filter 1050ms cubic-bezier(.2, .65, .3, 1), opacity 900ms ease, transform 1050ms ease;
+  pointer-events: none;
+}
+
+.welcome-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-rows: minmax(min-content, 1fr) auto;
+  align-items: center;
+  justify-items: center;
+  gap: 24px;
+  min-height: 100%;
+  padding: max(28px, env(safe-area-inset-top, 0px)) 24px max(22px, env(safe-area-inset-bottom, 0px));
+  overflow-y: auto;
+  background: radial-gradient(ellipse at 50% 30%, #fffaf3e8, #f8eddce8);
+  opacity: 1;
+  transition: opacity 900ms ease-in-out;
+}
+
+.welcome-screen.is-leaving { opacity: 0; pointer-events: none; }
+.welcome-screen .welcome-card { animation: welcome-card-enter 480ms ease-out both; }
+.welcome-screen .brand-logo,
+.welcome-screen .welcome-title,
+.welcome-screen .welcome-description,
+.welcome-screen .start-button,
+.welcome-screen .welcome-credit {
+  animation: welcome-element-enter 700ms cubic-bezier(.2, .65, .3, 1) both;
+}
+.welcome-screen .brand-logo { animation-delay: 80ms; }
+.welcome-screen .welcome-title { animation-delay: 180ms; }
+.welcome-screen .welcome-description { animation-delay: 280ms; }
+.welcome-screen .start-button { animation-delay: 380ms; }
+.welcome-screen .welcome-credit { animation-delay: 480ms; }
+.welcome-screen.is-leaving .welcome-card,
+.welcome-screen.is-leaving .brand-logo,
+.welcome-screen.is-leaving .welcome-title,
+.welcome-screen.is-leaving .welcome-description,
+.welcome-screen.is-leaving .start-button,
+.welcome-screen.is-leaving .welcome-credit { animation-play-state: paused; }
+
+@keyframes welcome-card-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes welcome-element-enter {
+  from { opacity: 0; filter: blur(3px); transform: translateY(8px); visibility: hidden; }
+  1% { visibility: visible; }
+  to { opacity: 1; filter: blur(0); transform: translateY(0); visibility: visible; }
+}
+
+.welcome-screen .welcome-card {
+  width: min(100%, 720px);
+  margin: auto;
+  padding: clamp(30px, 5vw, 50px);
+  gap: 22px;
+  background: linear-gradient(180deg, #fffdf8f5, #fbefdfed);
+}
+.welcome-screen .brand-logo { margin-bottom: 2px; }
+.welcome-screen .welcome-title {
+  max-width: 100%;
+  font-size: clamp(2.1rem, 5.5vw, 3.4rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.welcome-description {
+  max-width: 57ch;
+  color: #654837;
+  font-size: .9rem;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
+.welcome-screen .start-button { min-width: min(100%, 340px); padding: 19px 30px; }
+.welcome-screen .start-button:disabled { opacity: 1; }
+.welcome-credit {
+  width: 100%;
+  text-align: center;
+  color: #70503c;
+  font-size: .73rem;
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+@media (max-width: 600px) {
+  .welcome-screen { gap: 20px; padding-right: 18px; padding-left: 18px; }
+  .welcome-screen .welcome-card { padding: 28px 22px; gap: 22px; border-radius: 26px; }
+  .welcome-description { font-size: .85rem; line-height: 1.7; }
+  .welcome-screen .start-button { width: 100%; min-width: 0; padding: 18px 20px; font-size: 1.25rem; }
+}
+
+@media (max-height: 500px) and (min-width: 601px) {
+  .welcome-screen { gap: 14px; padding-top: 16px; padding-bottom: 12px; }
+  .welcome-screen .welcome-card { padding: 16px 34px 22px; gap: 12px; }
+  .welcome-screen .brand-logo { flex-direction: row; width: min(100%, 320px); gap: 10px; }
+  .welcome-screen .brand-cookie { width: 62px; height: 62px; }
+  .welcome-screen .brand-cookie-button { width: 62px; height: 62px; }
+  .welcome-screen .brand-wordmark { width: 240px; }
+  .welcome-screen .welcome-title { font-size: 2rem; }
+  .welcome-description { max-width: 65ch; font-size: .82rem; line-height: 1.55; }
+  .welcome-screen .start-button { padding: 12px 28px; font-size: 1.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome-screen, .app-reveal { transition: none; }
+  .welcome-screen .welcome-card,
+  .welcome-screen .brand-logo,
+  .welcome-screen .welcome-title,
+  .welcome-screen .welcome-description,
+  .welcome-screen .start-button,
+  .welcome-screen .welcome-credit { animation: none; }
+}

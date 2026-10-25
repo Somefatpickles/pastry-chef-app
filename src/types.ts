@@ -18,6 +18,7 @@ export type Ingredient = {
   name: string;
   amount: string;
   note?: string;
+  scaleWithBatch?: boolean;
 };
 
 export type RecipeStep = {
@@ -38,6 +39,35 @@ export type Recipe = {
   difficulty: "Novice" | "Intermediate" | "Experienced" | "Challenges";
   ingredients: Ingredient[];
   steps: RecipeStep[];
+  equipment?: string[];
+  storage?: string;
+  notes?: string[];
+  reviewNotes?: string[];
+  reviewedOn?: string;
+  sources?: { title: string; url: string }[];
+  sourceRecipeId?: string;
+  baseYield?: string;
+  batchScale?: number;
+  adaptation?: {
+    sourceRecipeId: string;
+    request: string;
+    createdAt: string;
+    changes: string[];
+    considerations: string[];
+    source: "openai" | "local";
+    model?: string;
+    before?: Omit<Recipe, 'adaptation'>;
+  };
+};
+
+export type ChefResult = {
+  recipe: Recipe;
+  summary: string;
+  changes: string[];
+  considerations: string[];
+  questions: string[];
+  source: "openai" | "local";
+  model?: string;
 };
 
 export type ChecklistState = Record<string, boolean>;
